@@ -14,6 +14,14 @@ class Settings(BaseSettings):
     app_origin: str = "http://localhost:3000"
     cookie_secure: bool = False
     session_days: int = 7
+    ai_provider: str = "openai"
+    openai_api_key: str = ""
+    openai_model: str = "gpt-4.1-mini"
+    ollama_base_url: str = "http://127.0.0.1:11434"
+    ollama_model: str = "gemma4:latest"
+    ollama_timeout_seconds: int = 240
+    ai_daily_limit: int = 30
+
 
     @property
     def google_ready(self) -> bool:

@@ -1,7 +1,7 @@
 # AI Marketing Manager · Phase 1
 
 Next.js + TypeScript / FastAPI / SQLAlchemy + Alembic / MySQL 기본 실행 환경입니다.
-현재 구현 범위는 Google 로그인, 사용자별 브랜드 등록·조회·수정·삭제, DESIGN.md 기반 화면, API·DB readiness와 실행 환경입니다. AI 생성·대화형 편집·채널 인증·실제 게시는 아직 구현되지 않았습니다.
+현재 Google 로그인, 사용자별 브랜드 관리, AI 아이디어 제안, 캠페인 저장, 채널별 콘텐츠 초안 생성, 직접 편집·수정 이력을 구현했습니다. 대화형 AI 수정, 승인, 채널 인증·실제 게시는 다음 단계입니다.
 
 Google 로그인은 `.env`에 OAuth 클라이언트 정보를 입력한 뒤 사용할 수 있습니다. 자세한 내용은 [Google 로그인 설정](docs/google-login.md)을 참고하세요.
 
@@ -74,3 +74,7 @@ curl -f http://localhost:3100/api/health/ready
 ## 인증 및 브랜드 관리 검증
 
 `backend/requirements-dev.txt` 설치 후 `cd backend && ../.venv/bin/python -m pytest -q`로 실행합니다. 0002 마이그레이션은 사용자·세션 테이블과 브랜드 소유자 필드를 추가하며 기존 브랜드를 보존합니다.
+
+## 콘텐츠 스튜디오
+
+브랜드 카드의 **아이디어 · 콘텐츠 만들기**에서 시작하세요. Ollama·OpenAI 설정과 상세 사용법은 [콘텐츠 스튜디오 안내](docs/content-studio.md)에 있습니다. `.env`에서 `AI_PROVIDER=ollama`와 내려받은 `OLLAMA_MODEL`을 설정하거나, OpenAI 공급자와 API 키를 설정한 뒤 `./run.sh dev`로 재시작하면 AI 생성이 활성화됩니다. 기존 Google 설정은 유지하세요.

@@ -23,3 +23,12 @@
 실제 Google 클라이언트 ID와 비밀키가 제공되지 않아 실계정 로그인 완료는 미검증입니다. `docs/google-login.md`에 따라 `.env` 설정 후 재시작하세요. 현재 포트는 3100이며 콜백은 `http://localhost:3100/api/auth/google/callback`입니다.
 
 AI 생성·캠페인·게시 채널 인증 및 실제 게시는 다음 단계입니다.
+
+
+## 콘텐츠 스튜디오 추가 구현
+
+브랜드 기반 AI 아이디어 3개 제안, 아이디어 생성 이력, 캠페인 전환·직접 작성, 채널별 초안 생성, 수동 수정 및 버전 이력을 추가했습니다. 자세한 설정과 제한은 `docs/content-studio.md`를 참고하세요. 기존 테스트를 포함한 22개 테스트, TypeScript 검사, Docker production build, MySQL Alembic check가 통과했습니다. 임시 환경의 브라우저 흐름도 검증했습니다. 실제 OpenAI 호출은 API 키가 없어 미검증입니다.
+
+## Ollama 지원
+
+로컬 설치 모델을 사용하는 Ollama 공급자를 추가했습니다. local/Docker 연결 주소를 분리하고, 활성 모델 표시와 공급자별 이력, 구조화 출력 검증, 모델 없음·연결·시간 초과 오류 처리를 지원합니다. 자동 테스트 31개와 TypeScript 검사, Docker 빌드가 통과했습니다.

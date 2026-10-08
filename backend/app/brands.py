@@ -5,7 +5,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.auth import current_user, require_origin
 from app.db import get_db
-from app.models import Brand, User
+from app.models import Brand, User, Campaign, Generation
+from sqlalchemy.exc import IntegrityError
 
 router = APIRouter(prefix="/api/brands", tags=["brands"])
 
@@ -54,6 +55,12 @@ def update_brand(brand_id: int, data: BrandInput, db: Session = Depends(get_db),
 
 @router.delete("/{brand_id}", status_code=204, dependencies=[Depends(require_origin)])
 def delete_brand(brand_id: int, db: Session = Depends(get_db), user: User = Depends(current_user)):
-    db.delete(owned_brand(brand_id, db, user))
-    db.commit()
+    brand = owned_brand(brand_id, db, user)
+    if db.scalar(select(Generation.id).where(Generation.brand_id==brand_id).limit(1)) or db.scalar(select(Campaign.id).where(Campaign.brand_id==brand_id).limit(1)):
+        raise HTTPException(409, "아이디어 또는 캠페인이 있는 브랜드는 삭제할 수 없습니다.")
+    db.delete(brand)
+    try: db.commit()
+    except IntegrityError as exc:
+        db.rollback()
+        raise HTTPException(409, "브랜드에 연결된 데이터가 있어 삭제할 수 없습니다.") from exc
     return Response(status_code=204)

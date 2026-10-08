@@ -18,7 +18,7 @@
 - **Phase 3:** 성과 수집, 다음 콘텐츠 제안, 브랜드 지식 검색.
 
 ## 데이터 모델 방향
-현재 `brands`, `users`, `login_sessions` 테이블이 구현되어 있다. Google 로그인과 사용자별 브랜드 CRUD까지 구현했다. 이후 campaigns(brand_id), contents(campaign_id, channel, status), content_versions, channel_connections, publish_jobs를 순차 추가한다. 발행 이력은 승인한 콘텐츠 버전과 연결한다.
+현재 `brands`, `users`, `login_sessions` 테이블이 구현되어 있다. Google 로그인과 사용자별 브랜드 CRUD까지 구현했다. `ai_generations`, `campaigns`, `contents`, `content_revisions`를 추가하여 아이디어·캠페인·초안과 수동 수정 이력을 구현했다. 다음은 대화형 AI 수정과 승인 상태, channel_connections, publish_jobs 순서다. 발행 이력은 승인한 콘텐츠 버전과 연결한다.
 
 ## 설계 원칙
 - 브라우저는 동일 출처 `/api`를 호출하고 Next.js가 FastAPI로 전달한다.
